@@ -102,6 +102,45 @@
         'defines': ['BUILDING_PC_SHARED=1'], }],  # OS != "win"
       ],    # conditions
     },
+    #    {
+    #      'target_name': 'libpomelo_client',
+    #      'type': 'static_library',
+    #      'dependencies': [
+    #        'libpomelo',
+    #      ],
+    #      'include_dirs': [
+    #        'include/',
+    #      ],
+    #      'sources': [
+    #        'src/JsonConverter.cpp',
+    #        'src/PomeloClient.cpp',
+    #      ],
+    #      'conditions': [
+    #        ['OS != "win"', {
+    #          'cflags': [
+    #            '-ggdb',
+    #            '-std=c++11',
+    #           '-stdlib=libc++'
+    #
+    #          ]
+    #        }],
+    #        [
+    #          'OS=="mac"',
+    #          {
+    #            "xcode_settings": 
+    #            {
+    #              # "OTHER_CFLAGS": ["-std=c++11"],
+    #              'OTHER_CPLUSPLUSFLAGS' : ['-std=c++11','-stdlib=libc++'],
+    #            }
+    #          }
+    #        ],
+    #
+    #        ##TODO: windows c++11 support
+    #
+    #        ['library=="shared_library"', {
+    #          'defines': ['BUILDING_PC_SHARED=1'], }],  # OS != "win"
+    #      ],    # conditions
+    #    },
   ],    # targets
 
   'conditions': [

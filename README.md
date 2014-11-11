@@ -1,3 +1,26 @@
+##libpomelo_c++_for_cocos2d-x
+
+##Example
+
+1. Open `test_ios/proj.ios_mac/test.xcodeproj`.
+2. Change the location of `cocos2d_libs.xcodeproj` to your own correct location.
+3. Select the `PROJECT -- test`, modify the `Header Search Paths` to your own paths, also do the same with `TARGETS -- test iOS` and `TARGETS -- test Mac`.
+4. Then build the project with the target of iOS or mac.
+5. See example in source code `PomeloClientTest.cpp` and `JsonConvertTest.cpp`.
+
+##Usage
+1. Copy these files to your own cococ2d-x project.
+  * `JsonConverter.h`
+  * `JsonConverter.cpp`
+  * `PomeloClient.h`
+  * `PomeloClient.cpp`
+2. Generate three static libraries: `libpomelo`, `libuv`, `libjansson`. Add reference to your own cocos2d-x project.
+
+  p.s. Generate different libraries according to your system platform!
+3. add the paths of `pomelo.h`, `jansson.h` and `uv.h` to the `Header Search Paths`.
+
+****************
+
 ##libpomelo
 
 libpomelo is a C language client SDK for Pomelo, supporting the Pomelo
@@ -22,7 +45,7 @@ protocol definition in Pomelo 0.3 version.
 ``` c
 // create a client instance.
 pc_client_t *client = pc_client_new();
-  
+
 ```
 
 ###Add listeners
@@ -68,7 +91,7 @@ void on_close(pc_client_t *client, const char *event, void *data) {
  ```
 
 ###Send a notify
- 
+
  ``` c
 // notified callback
 void on_notified(pc_notify_t *req, int status) {
@@ -100,7 +123,7 @@ void do_notify(pc_client_t *client) {
  ```
 
 ###Send a request
- 
+
  ``` c
 // request callback
 void on_request_cb(pc_request_t *req, int status, json_t *resp) {
@@ -138,15 +161,15 @@ void do_request(pc_client_t *client) {
   pc_request(client, request, route, msg, on_request_cb);
 }
  ```
- 
+
 ###More example
 
 The complete examples: [example/](https://github.com/NetEase/libpomelo/tree/master/example)
 
-Tcp server for test: [tcp-pomelo](https://github.com/changchang/tcp-pomelo). 
- 
+Tcp server for test: [tcp-pomelo](https://github.com/changchang/tcp-pomelo).
+
 ##API
- 
+
 More information about API, please refer to [pomelo.h](https://github.com/NetEase/libpomelo/blob/master/include/pomelo.h).
 
 
@@ -187,14 +210,14 @@ open git bash and type in
 ```
 mkdir -p build
 git clone https://github.com/martine/gyp.git build/gyp
-```   
+```
 then open cmd shell in windows and cd to your libpomelo project root directory  
 and type in  
 ```
-build\gyp\gyp.bat --depth=. pomelo.gyp -Dlibrary=static_library -DTO=pc 
-``` 
+build\gyp\gyp.bat --depth=. pomelo.gyp -Dlibrary=static_library -DTO=pc
+```
 
-then open pomelo.sln  in visual studio and you can build libpomelo in windows   
+then open pomelo.sln  in visual studio and you can build libpomelo in windows
 
 ###Cocos2d-x  
 ####Android  
