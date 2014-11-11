@@ -34,7 +34,7 @@ private:
     
     PomeloClient();
     PomeloClient(const PomeloClient&);
-    PomeloClient& operator==(const PomeloClient&);
+    PomeloClient& operator=(const PomeloClient&);
     
 public:
     ~PomeloClient();
