@@ -1,5 +1,11 @@
 ##libpomelo_c++_for_cocos2d-x
 
+##Introduction
+1. 一个类——PomeloClient，代码简洁易懂
+2. 支持c++11特性，代码更加精简
+3. 线程安全，支持cocos2dx主线程回调，类似HttpClient
+4. 支持将json_t结构和cocos2d::Value对象的互换，更适合coco2dx编程
+
 ##Example
 
 1. Open `test_ios/proj.ios_mac/test.xcodeproj`.
@@ -7,6 +13,18 @@
 3. Select the `PROJECT -- test`, modify the `Header Search Paths` to your own paths, also do the same with `TARGETS -- test iOS` and `TARGETS -- test Mac`.
 4. Then build the project with the target of iOS or mac.
 5. See example in source code `PomeloClientTest.cpp` and `JsonConvertTest.cpp`.
+
+###Test Server:
+***测试：***使用[chatofpomelo-websocket/game-server](https://github.com/NetEase/chatofpomelo-websocket)作为服务器。如果需要测试函数`onKick`回调，服务器需要添加如下代码：
+```
+sessionService.kick(uid,function(){console.log(session.uid);});
+```
+如果需要测试`notify`，服务器需要添加如下代码：
+```
+handler.notify = function(msg, session) {
+ console.log('receive notify content: '+msg.content);
+ }
+```
 
 ##Usage
 1. Copy these files to your own cococ2d-x project.

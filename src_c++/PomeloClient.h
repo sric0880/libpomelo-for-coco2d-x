@@ -26,7 +26,6 @@ typedef unordered_map<string, cb1I> cbNotifiesMap;
 
 class PomeloClient{
 private:
-    static PomeloClient pc;
     cb1I _cbForConnect;
     cbEventsMap _allEvents;
     cbReqeustsMap _allRequests;
@@ -34,9 +33,11 @@ private:
     pc_client_t* _client;
     
     PomeloClient();
+    PomeloClient(const PomeloClient&);
+    PomeloClient& operator==(const PomeloClient&);
     
 public:
-    virtual ~PomeloClient();
+    ~PomeloClient();
     
     static PomeloClient& getInstance();
     
@@ -52,7 +53,7 @@ public:
     **/
     int connect(const char* addr, int port);
     /**
-     *	@brief	异步连接服务器(@TODO 暂时不支持连接超时)
+     *	@brief	异步连接服务器
      *
      *	@Modified by qiong at 2014-02-18 12:37:00
      *
@@ -61,6 +62,9 @@ public:
      *	@param 	callback 根据参数status判断是否连接成功 -1（失败）0（成功）
      *
     **/
+    
+    //TODO: 暂时不支持连接超时
+    
     void connectAsync(const char* addr, int port, const cb1I& callback);
 
     /**

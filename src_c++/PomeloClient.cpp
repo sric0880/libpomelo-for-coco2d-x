@@ -9,7 +9,6 @@
 #include "PomeloClient.h"
 #include "JsonConverter.h"
 
-PomeloClient PomeloClient::pc;
 /*
  pomelo c callbacks
  */
@@ -31,6 +30,7 @@ void _pc_msg_encode_done_cb(pc_client_t *client, pc_buf_t buf);
 
 PomeloClient& PomeloClient::getInstance()
 {
+    static PomeloClient pc;
     return pc;
 }
 PomeloClient::PomeloClient():_cbForConnect(nullptr),_client(nullptr)
@@ -221,9 +221,7 @@ void _pc_event_cb(pc_client_t *client, const char *event, void *data)
      */
     json_incref(json);
     thread local_thread([&,event,json](){ //@see void stop()
-        /*
-         *>>BUG<< must have std::ref >>I don't know why
-         */
+        
         /*add the function object to the safe UI thread*/
         pc.getScheduler()->performFunctionInCocosThread(bind(std::ref(pc.getCbForEvent(event)), convertFrom(json)));
             /*
@@ -244,9 +242,7 @@ void _pc_request_cb(pc_request_t *req, int status, json_t *resp)
     cocos2d::log("on request: status %d, %s", status, json_dumps(resp, 0));
     PomeloClient& pc = PomeloClient::getInstance();
     json_incref(resp);
-    /*
-     *>>BUG<< must have std::ref >>I don't know why
-    */
+    
     /*add the function object to the safe UI thread*/
     pc.getScheduler()->performFunctionInCocosThread(bind(std::ref(pc.getCbForRequest(req->route)), status, convertFrom(resp)));
     
@@ -260,9 +256,7 @@ void _pc_notify_cb(pc_notify_t *req, int status)
 {
     cocos2d::log("on notify: %d", status);
     PomeloClient& pc = PomeloClient::getInstance();
-    /*
-     *>>BUG<< must have std::ref
-     */
+    
     /*add the function object to the safe UI thread*/
     pc.getScheduler()->performFunctionInCocosThread(bind(std::ref(pc.getCbForNotify(req->route)), status));
     // release resources
